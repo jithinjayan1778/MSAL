@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Auth from './Authentication/auth';
-import GetUserDetails from './Services/GetUserDetails'
+import LoginService from './Authentication/LoginService';
+import {GetAccessToken} from './Authentication/LoginService';
+import GetUserDetails from './Services/GetUserDetails';
 
 const  signInStyle = {
  backgroundColor:"green",
@@ -24,20 +25,26 @@ const tokenRequest = {
 class LoginBTN extends Component {
   
  handleLogin = ()=>{
-  const auth = new Auth();
-   auth.signInUser(loginRequest)
-   .then(d => 
-   {
-      auth.myMSALObj.acquireTokenSilent(tokenRequest)
-      .then((tokenResponse) => {
-          // Callback code here
-          console.log("access token m",tokenResponse.accessToken); 
-          GetUserDetails(tokenResponse.accessToken);
-      }).catch((error) => {
-          console.log(error);
-      });
-    
+  LoginService(loginRequest).then( r => {
+    console.log("returned",r)
+    GetAccessToken(tokenRequest).then( t =>
+     {
+         console.log("access token m",t); 
+         GetUserDetails(t);
+     });
   });
+  //  .then(d => 
+  //  {
+  //     myMSALObj.acquireTokenSilent(tokenRequest)
+  //     .then((tokenResponse) => {
+  //         // Callback code here
+  //         console.log("access token m",tokenResponse.accessToken); 
+  //         GetUserDetails(tokenResponse.accessToken);
+  //     }).catch((error) => {
+  //         console.log(error);
+  //     });
+    
+  // });
    
  }
 

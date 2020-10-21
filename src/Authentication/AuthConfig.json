@@ -1,0 +1,11 @@
+ {
+ "auth": {
+   "clientId": "214b38ee-0244-4d01-8f41-13dc16846424", 
+   "authority": "https://login.microsoftonline.com/320d71c1-7b81-48ba-8117-cc2c3c1bb518",
+   "redirectUri": "http://localhost:3000"
+ },
+ "cache": {
+   "cacheLocation": "sessionStorage", 
+   "storeAuthStateInCookie": false
+ }
+}
